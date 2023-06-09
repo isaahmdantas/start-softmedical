@@ -1,7 +1,7 @@
 # isaahmdantas/start-softmedical
 ## Descrição
 
-Template para criar os futuros projetos da Prefeitura Municipal de Mossoró utilizando o framework Ruby on Rails e o template html [softmedical-hero](https://github.com/heronildesjr/softmedical-hero) que foi desenvolvido para o sistema de gestão de municípios softmedical.
+Template para criar os futuros projetos do sistema 'Softmedical Gestão Hospitalar' utilizando o framework Ruby on Rails e o template [metronic](https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469).
 
 ## Requisitos 
 
@@ -13,7 +13,7 @@ Este template atualmente funciona com:
 * Node 16 ou superior 
 * Yarn 1.x 
 
-Se precisar de ajuda para configurar um ambiente de desenvolvimento Ruby on Rails, confira meu [Guia de Instalação](https://github.com/isaahmdantas/start-softmedical/blob/main/INSTALAR_RAILS.md)
+Se precisar de ajuda para configurar um ambiente de desenvolvimento Ruby on Rails, confira o [Guia de Instalação](https://github.com/isaahmdantas/start-softmedical/blob/main/INSTALAR_RAILS.md)
 
 
 

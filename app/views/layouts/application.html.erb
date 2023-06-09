@@ -24,24 +24,8 @@
   </head>
 
   <body>
-    <%= render "layouts/partials/header" %>
-    <div id="container-center" class="container-fluid p-0 bd-layout flex-column flex-sm-column flex-md-row">
-      <%= render "layouts/partials/aside" %>
-      <main id="main-content">
-        <div class="container-fluid">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <%= link_to 'Início', root_path %>
-              </li>
-              <%= yield(:breadcrumb) %>
-            </ol>
-          </nav>
-          <%= yield %>
-          <%= turbo_frame_tag "remote_modal", target: "_top" %>
-        </div>
-      </main>
-    </div>
+    <%= yield %>
+    <%= turbo_frame_tag "remote_modal", target: "_top" %>
     <%= render "shared/notificacao" %>
   </body>
 </html>
