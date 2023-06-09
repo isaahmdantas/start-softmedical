@@ -1,0 +1,44 @@
+<%% remote = false if remote == nil %>
+<%% id ||= Time.now.to_i %>
+
+
+<%%= form_with(model: <%= model_resource_name %>, data: { turbo: remote  }) do |form| %>
+    <%%= hidden_field_tag :remote, remote %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.label-required' no label. -->
+    <div class="card-body">
+        <% attributes.each do |attribute| -%>
+            <% if attribute.password_digest? -%>
+                <div class="mb-3">
+                    <%%= form.label :password, class: "form-label" %>
+                    <%%= form.password_field :password, class: 'form-control' %>
+                </div>
+                <div class="mb-3">
+                    <%%= form.label :password_confirmation, class: "form-label"  %>
+                    <%%= form.password_field :password_confirmation, class: 'form-control' %>
+                </div>
+            <% else %>
+                <% unless attribute.column_name == 'deleted_at' %>
+                        <div class="mb-3 <%= attribute.field_type == :check_box ? 'form-check' : nil %>">
+                            <% if attribute.field_type == :check_box %>
+                                <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-check-input" %>
+                                <%%= form.label :<%= attribute.column_name %>, class: "form-check-label"   %>
+                            <% else %>
+                                <%%= form.label :<%= attribute.column_name %>, class: "form-label"  %>
+                                <% if attribute.reference? %>
+                                    <%%= form.collection_select :<%= attribute.column_name %>, <%= attribute.name.camelize %>.all, :id, :nome, {include_blank: true}, class: "form-select" , style: "width: 100%" %>
+                                <% else %>
+                                    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control" %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+        <%%= render "<%= plural_table_name %>/form_actions" %>
+        <%% unless remote %>
+            <%%= link_to "<i class='bi bi-arrow-left'></i> #{t("helpers.links.back")}".html_safe, <%= "#{plural_table_name}" %>_path, :class=> "d-inline-block btn btn-secondary me-2" %>
+        <%% end %>
+    </div>
+<%% end %>
