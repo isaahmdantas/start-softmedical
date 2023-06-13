@@ -1,10 +1,16 @@
-<div class="text-center row">
-    <div class=" col-md-6">
-        <img src="https://i.ibb.co/CBkQM2r/404-Error-Page-not-Found-with-people-connecting-a-plug-pana.png" alt="" class="img-fluid">
-    </div>
-    <div class=" col-md-6 mt-5">
-        <p class="fs-3"> <span class="text-danger">Ops!</span> Não encontramos essa página.</p>
-        <p class="lead"></p>
-        <%= link_to "Retornar Página Inicial", root_path, class: "btn btn-sm btn-primary" %>
-    </div>
+<!--begin::Title-->
+<h1 class="fw-bolder fs-2hx text-gray-900 mb-4">Oops!</h1>
+<!--end::Title-->
+<!--begin::Text-->
+<div class="fw-semibold fs-6 text-gray-500 mb-7">Não encontramos essa página.</div>
+<!--end::Text-->
+<!--begin::Illustration-->
+<div class="mb-3">
+    <img src="https://i.ibb.co/CBkQM2r/404-Error-Page-not-Found-with-people-connecting-a-plug-pana.png" class="mw-100 mh-300px theme-light-show" alt="" />
 </div>
+<!--end::Illustration-->
+<!--begin::Link-->
+<div class="mb-0">
+   <%= link_to "Retornar Página Inicial", root_path, class: "btn btn-sm btn-primary" %>
+</div>
+<!--end::Link-->

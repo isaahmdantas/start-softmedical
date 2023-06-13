@@ -5,14 +5,13 @@ var content = "<%= escape_javascript('
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="pull-right">
-                    <h1 class="modal-title" title="Erros" data-toggle="tooltip" data-placement="top">
-                        Erros
-                    </h1>
+                <h3 class="modal-title">Errors</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
-                <div class="pull-left">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
-                </div>
+                <!--end::Close-->
             </div>
             <div class="modal-body">
               <div class="alert alert-danger d-flex align-items-center p-5" id="error_explanation">
@@ -31,7 +30,7 @@ var content = "<%= escape_javascript('
               </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>

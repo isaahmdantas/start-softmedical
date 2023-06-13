@@ -1,14 +1,16 @@
 <%%- model_class=<%= singular_table_name.titleize %> -%>
 
+
+<%% content_for :page_title, t('helpers.titles.list', :model => model_class.model_name.human(count: 2).titleize) %>
+
 <%% content_for :breadcrumb do %>
     <li class="breadcrumb-item">
-        <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path %>
+        <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path, class: 'text-muted text-hover-primary' %>
     </li>
     <li class="breadcrumb-item active" aria-current="page"><%%= t('helpers.links.list') %></li>
 <%% end %>
 
 
-<section id="list-example" class="sm-hero__section">
-    <h2 class="sm-hero__section-title"><%%= t('helpers.titles.list', :model=> model_class.model_name.human.titleize) %></h2>
+<div class="card-body py-4">
     <%%= render 'datatable' %>
-</section>
+</div>

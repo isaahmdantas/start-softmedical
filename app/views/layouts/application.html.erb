@@ -2,30 +2,52 @@
 <html>
   <head>
     <title><%= Rails.application.class.module_parent_name %></title>
+    <meta name="description" content="" />
+		<meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta property="og:locale" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:title" content="" />
+		<meta property="og:url" content="" />
+		<meta property="og:site_name" content="" />
+		<link rel="canonical" href="" />
+		<link rel="shortcut icon" href="" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!--begin::Fonts(mandatory for all pages)-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+		<!--end::Fonts-->
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-
-    <!--- gridjs Mermaid theme -->
-    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
-
-    <!-- DataTables.net -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-
-    <!-- toastify-js -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>  
   </head>
 
-  <body>
-    <%= yield %>
-    <%= turbo_frame_tag "remote_modal", target: "_top" %>
+  <body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
     <%= render "shared/notificacao" %>
+    <!--begin::Theme mode setup on page load-->
+		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+		<!--end::Theme mode setup on page load-->
+
+    <!--begin::App-->
+		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+      <!--begin::Page-->
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+        <%= render "partials/header" %>
+        <!--begin::Wrapper-->
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+          <%= render "partials/sidebar" %>
+          <!--begin::Main-->
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+            <%= yield %>
+            <%= turbo_frame_tag "remote_modal", target: "_top" %>
+          </div>
+					<!--end:::Main-->
+        </div>
+				<!--end::Wrapper-->
+      </div>
+			<!--end::Page-->
+    </div>
+    <%= render "partials/scrolltop" %>    
   </body>
 </html>

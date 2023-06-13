@@ -2,18 +2,19 @@
 <% audits ||= audits %>
 
 
-
-<div class="accordion" id="accordionExample">
+<!--begin::Accordion-->
+<div class="accordion" id="kt_accordion_audits">
   <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Audits" aria-expanded="true" aria-controls="Audits">
+    <h2 class="accordion-header" id="kt_accordion_audits_header_1">
+      <button class="accordion-button fs-4 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_audits_body_1" aria-expanded="true" aria-controls="kt_accordion_audits_body_1">
         Histórico de Alterações
       </button>
     </h2>
-    <div id="Audits" class="accordion-collapse collapse <%= show_collapse %>" data-bs-parent="#accordionExample">
+    <div id="kt_accordion_audits_body_1" class="accordion-collapse collapse <%%= show_collapse %>" aria-labelledby="kt_accordion_audits_header_1" data-bs-parent="#kt_accordion_audits">
       <div class="accordion-body">
         <%= render partial: "audits/datatable" , locals: {audits: audits} %>
       </div>
     </div>
   </div>
 </div>
+<!--end::Accordion-->

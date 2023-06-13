@@ -4,6 +4,7 @@
 <% end -%>
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
+    layout 'cruds'
     before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
     # GET <%= route_url %>

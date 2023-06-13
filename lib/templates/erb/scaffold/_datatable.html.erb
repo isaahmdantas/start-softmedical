@@ -7,24 +7,32 @@
 <%% remote ||=remote %>
 <%% datatable_url ||=datatable_<%= plural_table_name %>_url(remote: remote, format: 'json' ) %>
 <%% link_to_new ||=new_<%= singular_table_name %>_url() %>
-<%% link_to_new_remote ||=new_<%= singular_table_name %>_url(remote: true) %>
 
 
-<div class="sm-hero__toolbox mb-3">
-    <div class="card shadow-sm">
-        <div class="card-body p-2">
-            <%%= link_to link_to_new_remote, class: 'btn btn-sm border-0 btn-outline-success', data: {turbo_frame: "remote_modal"} do %>
-                <i class="bi bi-plus"></i> Adicionar (modal)</a>
-            <%% end %>
-            <%%= link_to link_to_new, class: 'btn btn-sm border-0 btn-outline-success' do %>
-                <i class="bi bi-link"></i> Adicionar (form externo)</a>
-            <%% end %>
-        </div>
+<!--begin::Wrapper-->
+<div class="d-flex flex-stack mb-5">
+    <!--begin::Search-->
+    <div class="d-flex align-items-center position-relative my-1">
+        <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span class="path2"></span></i>
+        <input type="text" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Pesquisar"/>
     </div>
-</div>
+    <!--end::Search-->
 
-<div class="card p-3">
-    <table class="table table-striped" style="width:100%" id="table-<%= plural_table_name %>-<%%= id %>">
+    <!--begin::Toolbar-->
+    <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+        <!--begin::Add -->
+        <%%= link_to link_to_new, class: 'btn btn-primary', data: {bs: {toggle: "tooltip"} }, title: "Adicionar" do %>
+            <i class="ki-duotone ki-plus fs-2"></i> Adicionar
+        <%% end %>
+        <!--end::Add -->
+    </div>
+    <!--end::Toolbar-->
+</div>
+<!--end::Wrapper-->
+
+<!--begin::Datatable-->
+<div class="table-responsive">
+    <table class="table align-middle table-row-dashed fs-6 gy-5"" style="width:100%" id="table-<%= plural_table_name %>-<%%= id %>">
         <thead>
             <tr>
                 <th>#</th>
@@ -35,63 +43,78 @@
                 <% end -%>
                 <th><%%= model_class.human_attribute_name(:created_at) %></th>
                 <th><%%= model_class.human_attribute_name(:updated_at) %></th>
-                <th><%%= t("helpers.actions") %></th>
+                <th class="text-end min-w-100px"><%%= t("helpers.actions") %></th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody class="text-gray-600 fw-semibold"></tbody>
     </table>
 </div>
+<!--end::Datatable-->
 <script type="text/javascript">
-    var table_<%= plural_table_name %>_<%%= id %> = $('#table-<%= plural_table_name %>-<%%= id %>').DataTable({
-        stateSave: true,
-        order: [
-            [0, "desc"]
-        ],
-        info: true,
-        language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
-        },
-        serverSide: true,
-        processing: true,
-        ajax: {
-            url: "<%%= datatable_url %>",
-            type: "POST",
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            }
-        },
-        columns: [
-            { "data": "index", "class": "col-md-1 coluna-index" },
-            <% attributes.without(name_attribute).each do |attribute| -%>
-                <% unless attribute.name.downcase == 'deleted_at' %>
-                    { "data": "<%= attribute.name.downcase %>" },
-                <% end %>	
-            <% end %>	
-            { "data": "created_at" },
-            { "data": "updated_at" },
-            { "data": "opcoes", "class": "rowlink-skip coluna-opcoes", "orderable": false }
-        ],
-        initComplete: function() {
-            var api = this.api();
-            // Atrasa a consulta para evitar requisições a cada caracter digitado
-            $(".table-<%= plural_table_name %>").closest("div.table-responsive").find('div.dataTables_filter input').off('keyup.DT input.DT');
-            var searchDelay = null;
-            $(".table-<%= plural_table_name %>").closest("div.table-responsive").find('div.dataTables_filter input').on('keyup', function() {
-                var search = $(".table-<%= plural_table_name %>").closest("div.table-responsive").find('div.dataTables_filter input').val();
-                clearTimeout(searchDelay);
-                searchDelay = setTimeout(function() {
-                    if (search != null) {
-                        api.search(search).draw();
-                    }
-                }, 1000);
-            });
-        }   
-    });
+    "use strict";
 
-    document.addEventListener("turbolinks:before-cache", function() {
-        if (table_<%= plural_table_name %>_<%%= id %> !== null) {
-            table_<%= plural_table_name %>_<%%= id %> .destroy();
-            table_<%= plural_table_name %>_<%%= id %> = null;
+    // Class definition
+    var KTDatatablesServerSide = function () {
+        // Shared variables
+        var table;
+        var dt;
+        var filterPayment;
+
+        // Private functions
+        var initDatatable = function () {
+            dt = $("#kt_datatable_example_1").DataTable({
+                searchDelay: 1000,
+                processing: true,
+                serverSide: true,
+                order: [[0, 'desc']],
+                stateSave: true,
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+                },
+                ajax: {
+                    url: "<%%= datatable_url %>",
+                    type: "POST",
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    }
+                },
+                columns: [
+                    { "data": "index", "class": "col-md-1 coluna-index" },
+                    <% attributes.without(name_attribute).each do |attribute| -%>
+                        <% unless attribute.name.downcase == 'deleted_at' %>
+                            { "data": "<%= attribute.name.downcase %>" },
+                        <% end %>	
+                    <% end %>	
+                    { "data": "created_at" },
+                    { "data": "updated_at" },
+                    { "data": "opcoes", "orderable": false }
+                ],
+            });
+
+            table = dt.$;
         }
+
+        // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
+        var handleSearchDatatable = function () {
+            const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
+            filterSearch.addEventListener('keyup', function (e) {
+                dt.search(e.target.value).draw();
+            });
+        }
+
+
+
+        // Public methods
+        return {
+            init: function () {
+                initDatatable();
+                handleSearchDatatable();
+            }
+        }
+    }();
+
+    // On document ready
+    KTUtil.onDOMContentLoaded(function () {
+        KTDatatablesServerSide.init();
     });
 </script>

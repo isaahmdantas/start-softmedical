@@ -2,43 +2,47 @@
 <%% id ||= Time.now.to_i %>
 
 
-<%%= form_with(model: <%= model_resource_name %>, data: { turbo: remote  }) do |form| %>
+<%%= form_with(model: <%= model_resource_name %>, data: { turbo: remote  }, html: {class: 'form fv-plugins-bootstrap5 fv-plugins-framework'}) do |form| %>
     <%%= hidden_field_tag :remote, remote %>
-    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.label-required' no label. -->
-    <div class="card-body">
-        <% attributes.each do |attribute| -%>
-            <% if attribute.password_digest? -%>
-                <div class="mb-3">
-                    <%%= form.label :password, class: "form-label" %>
-                    <%%= form.password_field :password, class: 'form-control' %>
-                </div>
-                <div class="mb-3">
-                    <%%= form.label :password_confirmation, class: "form-label"  %>
-                    <%%= form.password_field :password_confirmation, class: 'form-control' %>
-                </div>
-            <% else %>
-                <% unless attribute.column_name == 'deleted_at' %>
-                        <div class="mb-3 <%= attribute.field_type == :check_box ? 'form-check' : nil %>">
-                            <% if attribute.field_type == :check_box %>
-                                <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-check-input" %>
-                                <%%= form.label :<%= attribute.column_name %>, class: "form-check-label"   %>
-                            <% else %>
-                                <%%= form.label :<%= attribute.column_name %>, class: "form-label"  %>
-                                <% if attribute.reference? %>
-                                    <%%= form.collection_select :<%= attribute.column_name %>, <%= attribute.name.camelize %>.all, :id, :nome, {include_blank: true}, class: "form-select" , style: "width: 100%" %>
-                                <% else %>
-                                    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control" %>
-                                <% end %>
-                            <% end %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.required' no label. -->
+    <div class="card-body border-top p-9">
+        <div class="form-group">
+            <div class="form-group row">
+                <% attributes.each do |attribute| -%>
+                    <% if attribute.password_digest? -%>
+                        <div class="col-md-3">
+                            <%%= form.label :password, class: "form-label" %>
+                            <%%= form.password_field :password, class: 'form-control form-control-solid' %>
                         </div>
+                        <div class="col-md-3">
+                            <%%= form.label :password_confirmation, class: "form-label"  %>
+                            <%%= form.password_field :password_confirmation, class: 'form-control form-control-solid' %>
+                        </div>
+                    <% else %>
+                        <% unless attribute.column_name == 'deleted_at' %>
+                            <div class="col-md-3 <%= attribute.field_type == :check_box ? 'form-check form-check-custom form-check-solid' : nil %>">
+                                <% if attribute.field_type == :check_box %>
+                                    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-check-input" %>
+                                    <%%= form.label :<%= attribute.column_name %>, class: "form-check-label"   %>
+                                <% else %>
+                                    <%%= form.label :<%= attribute.column_name %>, class: "form-label"  %>
+                                    <% if attribute.reference? %>
+                                        <%%= form.collection_select :<%= attribute.column_name %>, <%= attribute.name.camelize %>.all, :id, :nome, {include_blank: true, include_hidden: false}, class: "form-select form-select-solid" , style: "width: 100%" %>
+                                    <% else %>
+                                        <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control form-control-solid" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    <% end %>
                 <% end %>
-            <% end %>
-        <% end %>
+            </div>
+        </div>
     </div>
-    <div class="card-footer d-flex justify-content-end">
-        <%%= render "<%= plural_table_name %>/form_actions" %>
+    <div class="card-footer d-flex justify-content-end py-6 px-9">
         <%% unless remote %>
-            <%%= link_to "<i class='bi bi-arrow-left'></i> #{t("helpers.links.back")}".html_safe, <%= "#{plural_table_name}" %>_path, :class=> "d-inline-block btn btn-secondary me-2" %>
+            <%%= link_to "<i class='las la-arrow-left'></i> #{t("helpers.links.back")}".html_safe, <%= "#{plural_table_name}" %>_path, :class=> "d-inline-block btn btn-secondary me-2" %>
         <%% end %>
+        <%%= render "<%= plural_table_name %>/form_actions" %>
     </div>
 <%% end %>

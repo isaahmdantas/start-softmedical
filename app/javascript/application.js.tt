@@ -3,5 +3,10 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 
+import "plugins.bundle"
+import "scripts.bundle"
+import "fullcalendar.bundle"
+import "datatables.bundle"
+import "widgets.bundle"
+import "widgets"
 import "softmedical"
-import "custom"

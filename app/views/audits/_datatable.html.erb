@@ -2,10 +2,10 @@
 <% id ||= Time.now.to_i %>
 
 
-<div class="card p-3">
-	<table class="table table-striped table-audits-<%= id %>" id="table-audits-<%= id %>">
+<div class="table-responsive">
+	<table class="table table-rounded table-striped border gy-7 gs-7 table-audits-<%= id %>" id="table-audits-<%= id %>">
 		<thead>
-			<tr>
+			<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 				<th>#</th>
                 <th>Usuário</th>
                 <th>Tipo</th>
@@ -16,7 +16,7 @@
                 <th>Data</th>
             </tr>
         </thead>
-        <tbody class="text-gray-600 fw-semibold ">
+        <tbody>
             <% if audits.present? %>
                 <% audits.try(:each_with_index) do |audit, index| %>
                     <tr>
@@ -25,7 +25,7 @@
                         <td><%= audit.try(:auditable_type) %></td>
                         <td><%= audit.action == "update" ? "Atualização" : audit.action == "create" ? "Inserção" : "Remoção"  %></td>
                         <td>
-                            <%= link_to "Visualizar", "audits/show?audit_id=#{audit.try(:id)}&auditable_type=#{audit.try(:auditable_type)}&auditable_id=#{audit.try(:auditable_id)}", class: "btn btn-sm btn-primary me-2", remote: true %>
+                            <%= link_to "Visualizar", "audits/show?audit_id=#{audit.try(:id)}&auditable_type=#{audit.try(:auditable_type)}&auditable_id=#{audit.try(:auditable_id)}", class: "btn btn-link btn-color-muted btn-active-color-primary me-5 mb-2", remote: true %>
                         </td>
                         <td class="col-md-1 coluna-index"><%= audit.try(:version) %></td>
                         <td><%= audit.try(:remote_address) %></td>

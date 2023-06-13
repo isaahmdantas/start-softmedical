@@ -1,7 +1,8 @@
 <% if resource.errors.any? %>
-    <div class="alert alert-danger alert-dismissible fade show">
+    <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+        <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>     
         <div class="d-flex flex-column">
-            <h4 class="mb-1 text-dark">Errors: </h4>
+            <h4 class="mb-1 text-danger">Errors: </h4>
             <span>
                 <ul> 
                     <% resource.errors.full_messages.each do |msg| %>
@@ -10,6 +11,5 @@
                 </ul>
             </span>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <% end %>

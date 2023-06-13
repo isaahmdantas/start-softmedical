@@ -11,7 +11,10 @@
  * It is generally better to create a new file per style scope.
  *
  * require_tree .
- *= require softmedical-default
- *= require custom
+ *= require plugins/custom/fullcalendar/fullcalendar.bundle
+ *= require plugins/custom/datatables/datatables.bundle
+ *= require plugins/global/plugins.bundle
+ *= require style.bundle.css
+ *= require softmedical
  *= require_self
 */

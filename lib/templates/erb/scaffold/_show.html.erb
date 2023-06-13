@@ -2,18 +2,17 @@
 
 <%% resource ||= resource %>
 
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <%- attributes.each do |attribute| -%>
-        <% unless  attribute.name.downcase == 'deleted_at' %>
-          <dt><strong><%%= model_class.human_attribute_name(:<%= attribute.name.downcase %>) %> :</strong></dt>
-          <dd><%%= resource.try(:<%= attribute.name.downcase %>) %></dd>
-        <% end %>
-      <% end %>
-    </dl>
-  </div>
-  <div class="col-md-12">
-    <%%= render partial: "audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
-  </div>
+
+<%- attributes.each do |attribute| -%>
+<div class="row mb-7">
+  <% unless  attribute.name.downcase == 'deleted_at' %>
+    <label class="col-lg-4 fw-semibold text-muted"><%%= model_class.human_attribute_name(:<%= attribute.name.downcase %>) %> </label>
+    <div class="col-lg-8">
+      <span class="fw-bold fs-6 text-gray-800"><%%= resource.try(:<%= attribute.name.downcase %>) %></span>
+    </div>
+  <% end %>
+</div>
+<% end %>
+<div class="row mb-7 mt-3">
+  <%%= render partial: "audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
 </div>

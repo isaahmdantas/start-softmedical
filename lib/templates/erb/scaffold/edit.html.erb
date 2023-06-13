@@ -1,34 +1,25 @@
 <%%- model_class=<%= singular_table_name.titleize %> -%>
 <%% remote ||= remote || params.try(:[], :remote) %>
 
+<%% content_for :page_title, t('helpers.titles.edit', :model => model_class.model_name.human(count: 2).titleize) %>
+
 <%% content_for :breadcrumb do %>
     <li class="breadcrumb-item">
-        <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path %>
+        <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path, class: 'text-muted text-hover-primary' %>
     </li>
     <li class="breadcrumb-item active" aria-current="page"><%%= t('helpers.links.edit') %></li>
 <%% end %>
 
 
-<section id="create-form-container">
-    <h2><%%= t('helpers.titles.edit', :model=> model_class.model_name.human.titleize) %></h2>
+<%%= error_messages(@<%= model_resource_name %>) %>
 
-    <%%= error_messages(@<%= model_resource_name %>) %>
-
-    <div class="row">
-        <div class="col-md-12">
-            <!-- commom bootstrap form -->
-            <div class="card mb-4">
-                <%% if remote == true || remote == 'true' %>
-                    <%%= render "shared/remote_modal", 
-                        modal_class: "#{model_class.model_name.human.titleize}", 
-                        modal_title: t('helpers.titles.edit', 
-                        :model=> model_class.model_name.human.titleize) do %>
-                            <%%= render "form" , <%= singular_table_name %>: @<%= singular_table_name %>, remote: true  %>
-                    <%%  end %>
-                <%% else %>
-                    <%%= render "form" , <%= singular_table_name %>: @<%= singular_table_name %> %>
-                <%% end %>
-            </div>
-        </div>
-    </div>
-</section>
+<%% if remote == true || remote == 'true' %>
+    <%%= render "shared/remote_modal", 
+        modal_class: "#{model_class.model_name.human.titleize}", 
+        modal_title: t('helpers.titles.edit', 
+        :model=> model_class.model_name.human.titleize) do %>
+            <%%= render "form" , <%= singular_table_name %>: @<%= singular_table_name %>, remote: true  %>
+    <%%  end %>
+<%% else %>
+    <%%= render "form" , <%= singular_table_name %>: @<%= singular_table_name %> %>
+<%% end %>

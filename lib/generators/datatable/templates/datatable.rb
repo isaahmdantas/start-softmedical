@@ -48,23 +48,27 @@ class <%= class_name %>Datatable
 
         
         def column_opcoes(<%= singular_table_name %>)
-            opcoes =  "<div class='sm-hero__datatable-actions'>" + (link_to(<%= singular_table_name %>_path(<%= singular_table_name %>),
-                    { remote: @remote, class: 'btn btn-sm btn-primary text-white me-2', title: 'Visualizar',
+            opcoes = ""
+
+            opcoes << (link_to(<%= singular_table_name %>_path(<%= singular_table_name %>),
+                    { remote: @remote, class: 'btn btn-primary me-2 mb-2', title: 'Visualizar',
                     data: { toggle: 'tooltip', placement: 'top' } }) do
-                    content_tag(:i, '', class: 'bi bi-search') + ' Visualizar'
-            end).to_s +
-            (link_to(edit_<%= singular_table_name %>_path(<%= singular_table_name %>),
-                        { remote: @remote, class: 'btn btn-sm btn-warning text-dark me-2', title: 'Editar',
+                    content_tag(:i, '', class: 'las la-search')
+            end).to_s
+
+            opcoes << (link_to(edit_<%= singular_table_name %>_path(<%= singular_table_name %>),
+                        { remote: @remote, class: 'btn btn-warning me-2 mb-2', title: 'Editar',
                         data: { toggle: 'tooltip', placement: 'top' } }) do
-                content_tag(:i, '', class: 'bi bi-pencil') + ' Editar'
-                end).to_s +
-            (button_to <%= singular_table_name %>_path(<%= singular_table_name %>),
+                content_tag(:i, '', class: 'las la-edit')
+                end).to_s
+
+            opcoes << (button_to <%= singular_table_name %>_path(<%= singular_table_name %>),
                         method: :delete,
                         data: { confirm: t('helpers.links.confirm_destroy', model: <%= singular_table_name %>.model_name.human), toggle: 'tooltip', placement: 'top' },
                         remote: @remote,
-                        class: 'btn btn-sm btn-danger text-white me-2', title: 'Remover' do
-                    content_tag(:i, '', class: 'bi bi-trash') + ' Remover'
-                end).to_s + "</div>"
+                        class: 'btn btn-danger me-2 mb-2', title: 'Remover' do
+                    content_tag(:i, '', class: 'las la-trash')
+                end).to_s
 
             opcoes.html_safe
         end

@@ -1,39 +1,32 @@
 <%%- model_class=<%= singular_table_name.titleize %> -%>
 <%% remote ||= remote || params.try(:[], :remote) %>
 
+
+<%% content_for :page_title, t('helpers.titles.show', :model => model_class.model_name.human(count: 2).titleize) %>
+
 <%% content_for :breadcrumb do %>
-  <li class="breadcrumb-item">
-      <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path %>
-  </li>
-  <li class="breadcrumb-item active" aria-current="page"><%%= t('helpers.links.show') %></li>
+    <li class="breadcrumb-item">
+        <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path, class: 'text-muted text-hover-primary' %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><%%= t('helpers.links.show') %></li>
 <%% end %>
 
 
-<section id="create-form-container">
-  <h2><%%= t('helpers.titles.show', :model=> model_class.model_name.human.titleize) %></h2>
-  <div class="row">
-    <div class="col-md-12">
-      <!-- commom bootstrap form -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <%% if remote == true || remote == 'true' %>
-            <%%= render "shared/remote_modal", 
-                modal_class: "#{model_class.model_name.human.titleize}", 
-                modal_title: t('helpers.titles.show', 
-                :model=> model_class.model_name.human.titleize) do %>
-                  <%%= render "show" , resource: @<%= singular_table_name %> %>
-            <%%  end %>
-          <%% else %>
-              <%%= render "show" , resource: @<%= singular_table_name %> %>
-          <%% end %>
-        </div>
-        <div class="card-footer d-flex justify-content-end">
-          <%%= link_to <%= "#{plural_table_name}" %>_path, :class=> "d-inline-block btn btn-secondary me-2" do  %>
-            <i class="bi bi-arrow-left"></i> <%%= t("helpers.links.back") %>
-          <%% end %>
-          <%%= render 'show_actions' , <%= singular_table_name %>: @<%= singular_table_name %> %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="card-body py-4">
+  <%% if remote == true || remote == 'true' %>
+    <%%= render "shared/remote_modal", 
+        modal_class: "#{model_class.model_name.human.titleize}", 
+        modal_title: t('helpers.titles.show', 
+        :model=> model_class.model_name.human.titleize) do %>
+          <%%= render "show" , resource: @<%= singular_table_name %> %>
+    <%%  end %>
+  <%% else %>
+    <%%= render "show" , resource: @<%= singular_table_name %> %>
+  <%% end %>
+</div>
+<div class="card-footer d-flex justify-content-end py-6 px-9">
+  <%%= link_to <%= "#{plural_table_name}" %>_path, :class=> "d-inline-block btn btn-secondary me-2" do  %>
+    <i class="las la-arrow-left"></i> <%%= t("helpers.links.back") %>
+  <%% end %>
+  <%%= render 'show_actions' , <%= singular_table_name %>: @<%= singular_table_name %> %>
+</div>
