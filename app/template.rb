@@ -59,3 +59,4 @@ copy_file "app/views/layouts/mailer.html.erb", force: true
 directory "app/views/home", force: true
 
 copy_file "app/views/layouts/erro.html.erb"
+copy_file "app/views/layouts/cruds.html.erb"
