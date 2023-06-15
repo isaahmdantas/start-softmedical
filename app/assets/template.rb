@@ -1,5 +1,6 @@
 directory "app/assets/stylesheets", force: true
 directory "app/assets/javascripts", force: true
+directory "app/assets/images", force: true
 copy_file "app/javascript/controllers/remote_modal_controller.js", force: true
 
 directory "vendor/assets", force: true    

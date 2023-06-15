@@ -1,4 +1,36 @@
-/* form */
+/* form button_to */
 form.button_to {
     all: unset;
+}
+
+/** Logo Sidebar **/
+.app-sidebar-logo-default {
+    margin-left: 4rem !important;
+}
+
+
+/** Cores primárias **/
+:root {
+    --bs-primary: #00a69c;
+    --bs-primary: #00a69c;
+    --bs-primary-active:  #007c74;
+    --bs-pagination-active-bg:  #00a69c;
+    --bs-component-hover-color: #00a69c;
+    --bs-component-hover-bg: #00a69c;
+    --bs-link-color: #00a69c;
+    --bs-link-hover-color: #00a69c;
+    --bs-text-primary: #00a69c;
+    --bs-component-active-bg: #00a69c;
+    --bs-component-checked-bg: #00a69c;
+    --bs-menu-link-color-hover: #00a69c;
+    --bs-menu-link-color-show: #00a69c;
+    --bs-menu-link-color-here: #00a69c;
+    --bs-menu-link-color-active: #00a69c;
+    --bs-ribbon-label-bg: #00a69c;
+}
+:root,[data-bs-theme=light] {
+  --bs-prismjs-btn-color-hover: #00a69c;
+}
+[data-bs-theme=dark] {
+  --bs-prismjs-btn-color-hover: #00a69c;
 }
