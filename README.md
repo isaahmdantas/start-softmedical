@@ -87,6 +87,11 @@ rails generate datatable Posts
 rails generate tradutor Post
 ``` 
 
+### Como gerar o menu do crud no sidebar  
+```bash 
+rails generate menu Post
+``` 
+
 >> NOTA: IMPORTANTE RODAR OS GERADORES APÓS O ```rails db:migrate```
 
 ## O que isso faz?
