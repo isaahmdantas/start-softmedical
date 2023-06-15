@@ -6,21 +6,25 @@
     <%%= hidden_field_tag :remote, remote %>
     <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.required' no label. -->
     <div class="card-body border-top p-9">
-        <div class="form-group">
-            <div class="form-group row">
-                <% attributes.each do |attribute| -%>
-                    <% if attribute.password_digest? -%>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="row">
+            <% attributes.each do |attribute| -%>
+                <% if attribute.password_digest? -%>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
                             <%%= form.label :password, class: "form-label" %>
                             <%%= form.password_field :password, class: 'form-control form-control-solid' %>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
                             <%%= form.label :password_confirmation, class: "form-label"  %>
                             <%%= form.password_field :password_confirmation, class: 'form-control form-control-solid' %>
                         </div>
-                    <% else %>
-                        <% unless attribute.column_name == 'deleted_at' %>
-                            <div class="col-lg-4 col-md-4 col-sm-12 <%= attribute.field_type == :check_box ? 'form-check form-check-custom form-check-solid' : nil %>">
+                    </div>
+                <% else %>
+                    <% unless attribute.column_name == 'deleted_at' %>
+                        <div class="col-lg-6 col-md-4 col-sm-12 <%= attribute.field_type == :check_box ? 'form-check form-check-custom form-check-solid' : nil %>">
+                            <div class="form-group">
                                 <% if attribute.field_type == :check_box %>
                                     <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-check-input" %>
                                     <%%= form.label :<%= attribute.column_name %>, class: "form-check-label"   %>
@@ -33,10 +37,10 @@
                                     <% end %>
                                 <% end %>
                             </div>
-                        <% end %>
+                        </div>
                     <% end %>
                 <% end %>
-            </div>
+            <% end %>
         </div>
     </div>
     <div class="card-footer d-flex justify-content-end py-6 px-9">

@@ -6,6 +6,7 @@ copy_file "app/controllers/audits_controller.rb"
 
 copy_file "app/helpers/layout_helper.rb"
 copy_file "app/helpers/form_error_helper.rb"
+copy_file "app/helpers/application_helper.rb", force: true
 
 copy_file "app/models/concerns/searchrable.rb"
 

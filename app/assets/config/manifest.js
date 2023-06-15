@@ -9,6 +9,7 @@
 //= link_directory ../../../vendor/assets .js
 //= link_directory ../../../vendor/assets .css
 //= link_tree ../../../vendor/assets
+//= link_tree ../../../vendor/assets/images
 //= link_tree ../../../vendor/assets/stylesheets
 //= link_tree ../../../vendor/assets/javascripts
 //= link_tree ../../../vendor/assets/plugins
