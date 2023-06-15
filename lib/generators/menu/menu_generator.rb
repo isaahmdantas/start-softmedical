@@ -46,7 +46,7 @@ class MenuGenerator < Rails::Generators::NamedBase
           <!--begin:Menu item-->
           <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="#{plural_table_name}_url">
+            <a class="menu-link" href='<%= #{plural_table_name}_path %>'>
               <span class="menu-bullet">
                 <span class="bullet bullet-dot"></span>
               </span>
@@ -58,7 +58,7 @@ class MenuGenerator < Rails::Generators::NamedBase
           <!--begin:Menu item-->
           <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="new_#{singular_table_name}_url">
+            <a class="menu-link" href='<%= new_#{singular_table_name}_path %>'>
               <span class="menu-bullet">
                 <span class="bullet bullet-dot"></span>
               </span>
