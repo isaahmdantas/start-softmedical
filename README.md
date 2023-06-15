@@ -87,6 +87,8 @@ rails generate datatable Posts
 rails generate tradutor Post
 ``` 
 
+>> NOTA: IMPORTANTE RODAR OS GERADORES APÓS O ```rails db:migrate```
+
 ## O que isso faz?
 
 O template executará as seguintes etapas:

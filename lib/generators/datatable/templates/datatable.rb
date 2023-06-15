@@ -51,13 +51,13 @@ class <%= class_name %>Datatable
             opcoes = ""
 
             opcoes << (link_to(<%= singular_table_name %>_path(<%= singular_table_name %>),
-                    { remote: @remote, class: 'btn btn-primary me-2 mb-2', title: 'Visualizar',
+                    { remote: @remote, class: 'btn btn-icon btn-primary me-2 mb-2', title: 'Visualizar',
                     data: { toggle: 'tooltip', placement: 'top' } }) do
                     content_tag(:i, '', class: 'las la-search')
             end).to_s
 
             opcoes << (link_to(edit_<%= singular_table_name %>_path(<%= singular_table_name %>),
-                        { remote: @remote, class: 'btn btn-warning me-2 mb-2', title: 'Editar',
+                        { remote: @remote, class: 'btn btn-icon btn-warning me-2 mb-2', title: 'Editar',
                         data: { toggle: 'tooltip', placement: 'top' } }) do
                 content_tag(:i, '', class: 'las la-edit')
                 end).to_s
@@ -66,7 +66,7 @@ class <%= class_name %>Datatable
                         method: :delete,
                         data: { confirm: t('helpers.links.confirm_destroy', model: <%= singular_table_name %>.model_name.human), toggle: 'tooltip', placement: 'top' },
                         remote: @remote,
-                        class: 'btn btn-danger me-2 mb-2', title: 'Remover' do
+                        class: 'btn btn-icon btn-danger me-2 mb-2', title: 'Remover' do
                     content_tag(:i, '', class: 'las la-trash')
                 end).to_s
 

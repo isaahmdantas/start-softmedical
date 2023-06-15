@@ -10,17 +10,17 @@
             <div class="form-group row">
                 <% attributes.each do |attribute| -%>
                     <% if attribute.password_digest? -%>
-                        <div class="col-md-3">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
                             <%%= form.label :password, class: "form-label" %>
                             <%%= form.password_field :password, class: 'form-control form-control-solid' %>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
                             <%%= form.label :password_confirmation, class: "form-label"  %>
                             <%%= form.password_field :password_confirmation, class: 'form-control form-control-solid' %>
                         </div>
                     <% else %>
                         <% unless attribute.column_name == 'deleted_at' %>
-                            <div class="col-md-3 <%= attribute.field_type == :check_box ? 'form-check form-check-custom form-check-solid' : nil %>">
+                            <div class="col-lg-4 col-md-4 col-sm-12 <%= attribute.field_type == :check_box ? 'form-check form-check-custom form-check-solid' : nil %>">
                                 <% if attribute.field_type == :check_box %>
                                     <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-check-input" %>
                                     <%%= form.label :<%= attribute.column_name %>, class: "form-check-label"   %>

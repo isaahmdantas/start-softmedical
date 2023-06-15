@@ -20,6 +20,9 @@
 		<!--end::Fonts-->
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <!-- Carregar Script`s somento do template metronic -->
+    <%= javascript_include_tag 'metronic', 'data-turbolinks-track': 'reload' %>
+    
     <%= javascript_importmap_tags %>
   </head>
 
@@ -49,10 +52,6 @@
     </div>
     <%= render "layouts/partials/scrolltop" %>    
 
-
-
-    <!-- Carregar Script`s somento do template metronic -->
-    <%= javascript_include_tag 'metronic', 'data-turbolinks-track': 'reload' %>
     <%= render "shared/notificacao" %>
   </body>
 </html>

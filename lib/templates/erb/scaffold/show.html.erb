@@ -8,6 +8,11 @@
     <li class="breadcrumb-item">
         <%%= link_to model_class.model_name.human(count: 2).titleize, <%= plural_table_name %>_path, class: 'text-muted text-hover-primary' %>
     </li>
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <!--end::Item-->
     <li class="breadcrumb-item active" aria-current="page"><%%= t('helpers.links.show') %></li>
 <%% end %>
 

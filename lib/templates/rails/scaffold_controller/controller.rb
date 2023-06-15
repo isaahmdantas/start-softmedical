@@ -39,7 +39,7 @@ class <%= controller_class_name %>Controller < ApplicationController
                 remote = params.try(:[], :remote)
                 location = [@<%= singular_table_name %>]
                 location.unshift(params[:controller].split("/")[0].to_sym) if params[:controller].split("/").length > 1
-                format.html { redirect_to remote.blank? ? location : <%= plural_table_name %>_path, notice: notice}
+                format.html { redirect_to remote.blank? || remote == 'false' ? location : <%= plural_table_name %>_path, notice: notice}
                 format.json { render :show, status: :created, location: @<%= singular_table_name %> }
             else
                 format.html { render :new, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class <%= controller_class_name %>Controller < ApplicationController
                 remote = params.try(:[], :remote)
                 location = [@<%= singular_table_name %>]
                 location.unshift(params[:controller].split("/")[0].to_sym) if params[:controller].split("/").length > 1
-                format.html { redirect_to remote.blank? ? location : <%= plural_table_name %>_path, notice: notice}
+                format.html { redirect_to remote.blank? || remote == 'false' ? location : <%= plural_table_name %>_path, notice: notice}
                 format.json { render :show, status: :ok, location: location }
                 format.js { flash[:notice] = notice}
             else

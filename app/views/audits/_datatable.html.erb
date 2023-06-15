@@ -25,7 +25,7 @@
                         <td><%= audit.try(:auditable_type) %></td>
                         <td><%= audit.action == "update" ? "Atualização" : audit.action == "create" ? "Inserção" : "Remoção"  %></td>
                         <td>
-                            <%= link_to "Visualizar", "audits/show?audit_id=#{audit.try(:id)}&auditable_type=#{audit.try(:auditable_type)}&auditable_id=#{audit.try(:auditable_id)}", class: "btn btn-link btn-color-muted btn-active-color-primary me-5 mb-2", remote: true %>
+                            <%= link_to "Visualizar", audit_path(audit.try(:id), auditable_type: audit.try(:auditable_type), auditable_id: audit.try(:auditable_id)), class: "btn btn-sm btn-primary", data: {turbo_frame: "remote_modal"} %>
                         </td>
                         <td class="col-md-1 coluna-index"><%= audit.try(:version) %></td>
                         <td><%= audit.try(:remote_address) %></td>

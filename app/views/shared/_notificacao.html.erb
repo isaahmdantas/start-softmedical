@@ -1,5 +1,5 @@
 <script>
-    function toastify(message, type) {
+    function flashMessages(type,msg){
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -17,49 +17,34 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-
-        if (type == 'error') {
-            toastr.error(message);
-        } else if (type == 'success') {
-            toastr.success(message);
-        } else if  (type == 'warning') {
-            toastr.warning(message);
-        } else {
-            toastr.warning(message);
-        }       
-    }
-
-    function flashMessages(type,msg){
+        
         switch(type){
             case "alert":
-                toastify(msg, "error");
+                toastr.error(msg,"Erro!");
                 break;
             case "error":
-                toastify(msg, "error");
+                toastr.error(msg,"Erro!");
                 break;
             case "notice":
-                toastify(msg, "success");
+                toastr.success(msg,"Sucesso!");
                 break;
             case "warning":
-                toastify(msg, "warning");
+                toastr.warning(msg,"Alerta!");
                 break;
             case "info":
-                toastify(msg, "info");
+                toastr.info(msg,"Informação!");
                 break;
         }
     } 
     $(document).ready(function(){
         var flash=<%=flash.to_json.html_safe%>;
         $.each(flash,function(index,value){
-            toastify(value[1], value[0]);
+            flashMessages(value[0],value[1]);
         })
     });
     $(document).ajaxComplete(function(event,request){
         var msg=decodeURIComponent(escape(request.getResponseHeader('X-Message')));
         var type=request.getResponseHeader('X-Message-Type');
-
-        if (msg != null && msg != 'error, warning, notice' && type != null && type != '[:error, :warning, :notice]')  {
-           toastify(msg, type);
-        }
+        flashMessages(type,msg);
     });
 </script>

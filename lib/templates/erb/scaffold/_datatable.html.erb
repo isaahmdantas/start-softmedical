@@ -32,7 +32,7 @@
 
 <!--begin::Datatable-->
 <div class="table-responsive">
-    <table class="table align-middle table-row-dashed fs-6 gy-5"" style="width:100%" id="table-<%= plural_table_name %>-<%%= id %>">
+    <table class="table align-middle table-row-dashed fs-6 gy-5" style="width:100%" id="table-<%= plural_table_name %>-<%%= id %>">
         <thead>
             <tr>
                 <th>#</th>
@@ -62,7 +62,7 @@
 
         // Private functions
         var initDatatable = function () {
-            dt = $("#kt_datatable_example_1").DataTable({
+            dt = $("#table-<%= plural_table_name %>-<%%= id %>").DataTable({
                 searchDelay: 1000,
                 processing: true,
                 serverSide: true,

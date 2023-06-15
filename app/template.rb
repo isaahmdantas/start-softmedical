@@ -46,7 +46,7 @@ route "match '404', :to => 'errors#not_found', :via => :all"
 route "match '422', :to => 'errors#unacceptable', :via => :all"
 route "match '500', :to => 'errors#internal_server_error', :via => :all"
 
-route "match '/audits/show', controller: 'audits', action: 'show', via: [:get]"
+route "resources :audits, only: :show"
 
 directory "app/views/layouts/partials", force: true
 directory "app/views/shared", force: true
