@@ -92,6 +92,11 @@ rails generate tradutor Post
 rails generate menu Post
 ``` 
 
+### Como atualizar a rota do crud incluindo as rotas de 'search' e a rota do 'datatable'
+```bash 
+rails generate change_routes Post
+``` 
+
 >> NOTA: IMPORTANTE RODAR OS GERADORES APÓS O ```rails db:migrate```
 
 ## O que isso faz?
